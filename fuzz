@@ -4,14 +4,14 @@ import argparse
 import os
 
 def fuzz_vhosts(url, fs_filter, extensions):
-    wordlist = "~/tools/wordlists/subdomains-top1million-5000.txt"
+    wordlist = "~/tools/wordlists/subdomains-top1million-5000.txt" # Change this
     default_extensions = ".db,.php,.html,.txt,.js,.css,.json,.xml,.zip,.tar,.gz,.asp,.aspx,.jsp,.do,.git"
     extensions = extensions if extensions else default_extensions
     fs_filter = f"-fs {fs_filter}" if fs_filter else ""
     os.system(f"ffuf -w {wordlist} -H 'Host: FUZZ.{url}' -u http://{url} -mc 200-418 -e {extensions} {fs_filter}")
 
 def fuzz_dirs(url, fs_filter, extensions):
-    wordlist = "~/tools/wordlists/directory-list-2.3-medium.txt"
+    wordlist = "~/tools/wordlists/directory-list-2.3-medium.txt" # Change this
     default_extensions = ".db,.php,.html,.txt,.js,.css,.json,.xml,.zip,.tar,.gz,.asp,.aspx,.jsp,.do,.git"
     extensions = extensions if extensions else default_extensions
     fs_filter = f"-fs {fs_filter}" if fs_filter else ""
