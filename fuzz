@@ -32,6 +32,6 @@ def main():
         fuzz_dirs(args.url, args.fs_filter, args.extensions)
 
 if __name__ == "__main__":
-    main()
+    main() 
 
 
