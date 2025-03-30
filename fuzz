@@ -1,0 +1,37 @@
+#!/usr/bin/python3
+
+import argparse
+import os
+
+def fuzz_vhosts(url, fs_filter, extensions):
+    wordlist = "~/tools/wordlists/subdomains-top1million-5000.txt"
+    default_extensions = ".db,.php,.html,.txt,.js,.css,.json,.xml,.zip,.tar,.gz,.asp,.aspx,.jsp,.do,.git"
+    extensions = extensions if extensions else default_extensions
+    fs_filter = f"-fs {fs_filter}" if fs_filter else ""
+    os.system(f"ffuf -w {wordlist} -H 'Host: FUZZ.{url}' -u http://{url} -mc 200-418 -e {extensions} {fs_filter}")
+
+def fuzz_dirs(url, fs_filter, extensions):
+    wordlist = "~/tools/wordlists/directory-list-2.3-medium.txt"
+    default_extensions = ".db,.php,.html,.txt,.js,.css,.json,.xml,.zip,.tar,.gz,.asp,.aspx,.jsp,.do,.git"
+    extensions = extensions if extensions else default_extensions
+    fs_filter = f"-fs {fs_filter}" if fs_filter else ""
+    os.system(f"ffuf -w {wordlist} -u http://{url}/FUZZ -mc 200-418 -e {extensions} {fs_filter}")
+
+def main():
+    parser = argparse.ArgumentParser(description="Easy ffuf wrapper for fuzzing vhosts and directories.")
+    parser.add_argument("mode", choices=["vhost", "dir"], help="Choose fuzzing mode: vhost or dir")
+    parser.add_argument("-u", "--url", required=True, help="Target URL (without http://)")
+    parser.add_argument("-e", "--fs-filter", default="", help="File size filter (e.g., 42,100-200)")
+    parser.add_argument("-x", "--extensions", default="", help="File extensions to fuzz (e.g., .php,.txt,.html)")
+    
+    args = parser.parse_args()
+    
+    if args.mode == "vhost":
+        fuzz_vhosts(args.url, args.fs_filter, args.extensions)
+    elif args.mode == "dir":
+        fuzz_dirs(args.url, args.fs_filter, args.extensions)
+
+if __name__ == "__main__":
+    main()
+
+
