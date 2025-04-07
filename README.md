@@ -1,8 +1,6 @@
 # Scripts
 Scripts that I made while doing boxes
 
-## Fuzz | Easy to use FFuF wrapper 
-
 # FFUF Wrapper Script
 
 ## Description
