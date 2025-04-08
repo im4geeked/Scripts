@@ -29,12 +29,12 @@ This script is a simple wrapper for `ffuf` that simplifies the process of fuzzin
 ## Examples
 1. Fuzz vhosts:
 ```
-./ffuf_wrapper.py vhost -u example.com -x .php,.html -e 42
+./fuzz.py vhost -u example.com -x .php,.html -e 42
 ```
 
 2. Fuzz directories:
 ```
-./ffuf_wrapper.py dir -u example.com
+./fuzz.py dir -u example.com
 ```
 
 ## Requirements
