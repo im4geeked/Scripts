@@ -46,6 +46,6 @@ This script is a simple wrapper for `ffuf` that simplifies the process of fuzzin
 - Wordlists (paths can be modified in the script)
 
 ## Note
-Before using, you should modify the wordlist paths in the script to point to your actual wordlist locations:
+Before using, you should modify the wordlist paths in the script to point to your actual wordlist locations i.e `/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt`:
 - `~/tools/wordlists/subdomains-top1million-5000.txt` for vhost mode
 - `~/tools/wordlists/directory-list-2.3-medium.txt` for directory mode
