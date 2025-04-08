@@ -1,6 +1,3 @@
-# Scripts
-Scripts that I made while doing boxes
-
 # FFUF Wrapper Script
 
 ## Description
