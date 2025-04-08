@@ -4,20 +4,20 @@ import argparse
 import os
 
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"
+VHOST_WORDLIST = "~/tools/wordlist/vhost/subdomains-top1million-5000.txt" # Change this
+DIR_WORDLIST = "~/tools/wordlist/directory/raft-medium-directories.txt" # Change this 
 
 def fuzz_vhosts(url, fs_filter, extensions):
-    wordlist = "~/tools/wordlist/vhost/subdomains-top1million-5000.txt"  # Change this
     default_extensions = ".db,.php,.html,.txt,.js,.css,.json,.xml,.zip,.tar,.gz,.asp,.aspx,.jsp,.do,.git"
     extensions = extensions if extensions else default_extensions
     fs_filter = f"-fs {fs_filter}" if fs_filter else ""
-    os.system(f"ffuf -w {wordlist} -H 'Host: FUZZ.{url}' -H 'User-Agent: {USER_AGENT}' -u http://{url} -mc 200,301,302,307,401,403 -e {extensions} {fs_filter}")
+    os.system(f"ffuf -w {VHOST_WORDLIST} -H 'Host: FUZZ.{url}' -H 'User-Agent: {USER_AGENT}' -u http://{url} -mc 200,301,302,307,401,403 -e {extensions} {fs_filter}")
 
 def fuzz_dirs(url, fs_filter, extensions):
-    wordlist = "~/tools/wordlist/directory/raft-medium-directories.txt"  # Change this
     default_extensions = ".db,.php,.html,.txt,.js,.css,.json,.xml,.zip,.tar,.gz,.asp,.aspx,.jsp,.do,.git"
     extensions = extensions if extensions else default_extensions
     fs_filter = f"-fs {fs_filter}" if fs_filter else ""
-    os.system(f"ffuf -w {wordlist} -H 'User-Agent: {USER_AGENT}' -u http://{url}/FUZZ -mc 200,301,302,307,401,403 -e {extensions} {fs_filter}")
+    os.system(f"ffuf -w {DIR_WORDLIST} -H 'User-Agent: {USER_AGENT}' -u http://{url}/FUZZ -mc 200,301,302,307,401,403 -e {extensions} {fs_filter}")
 
 def main():
     parser = argparse.ArgumentParser(description="Easy ffuf wrapper for fuzzing vhosts and directories.")
