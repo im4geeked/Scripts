@@ -23,13 +23,13 @@ This script is a simple wrapper for `ffuf` that simplifies the process of fuzzin
 | Option | Description | Example |
 |--------|-------------|---------|
 | `-u`, `--url` | Target URL (without http://) (required) | example.com |
-| `-e`, `--fs-filter` | File size filter | 42 or 100-200 |
+| `-fs`, `--fs-filter` | File size filter | 42 or 100-200 |
 | `-x`, `--extensions` | File extensions to fuzz (comma-separated) | .php,.txt,.html |
 
 ## Examples
 1. Fuzz vhosts:
 ```
-./fuzz.py vhost -u example.com -x .php,.html -e 42
+./fuzz.py vhost -u example.com -x .php,.html -fs 42
 ```
 
 2. Fuzz directories:
