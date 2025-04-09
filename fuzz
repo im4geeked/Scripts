@@ -20,10 +20,14 @@ def fuzz_dirs(url, fs_filter, extensions):
     os.system(f"ffuf -w {DIR_WORDLIST} -H 'User-Agent: {USER_AGENT}' -u http://{url}/FUZZ -mc 200,301,302,307,401,403 -e {extensions} {fs_filter}")
 
 def main():
-    parser = argparse.ArgumentParser(description="Easy ffuf wrapper for fuzzing vhosts and directories.")
+    parser = argparse.ArgumentParser(
+        description="Easy ffuf wrapper for fuzzing vhosts and directories.",
+        epilog="Notes:\n1. You should configure your wordlist paths before fuzzing for directories/virtual hosts.\n2. Provide URL without http:// or paths (e.g., 'example.com' not 'http://example.com/path')",
+        formatter_class=argparse.RawTextHelpFormatter
+    )
     parser.add_argument("mode", choices=["vhost", "dir"], help="Choose fuzzing mode: vhost or dir")
-    parser.add_argument("-u", "--url", required=True, help="Target URL (without http://)")
-    parser.add_argument("-e", "--fs-filter", default="", help="File size filter (e.g., 42,100-200)")
+    parser.add_argument("-u", "--url", required=True, help="Target URL (without http:// or paths)")
+    parser.add_argument("-fs", "--fs-filter", default="", help="File size filter (e.g., 42,100-200)")
     parser.add_argument("-x", "--extensions", default="", help="File extensions to fuzz (e.g., .php,.txt,.html)")
     
     args = parser.parse_args()
