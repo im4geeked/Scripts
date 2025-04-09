@@ -1,7 +1,7 @@
 # FFUF Wrapper Script
 
 ## Description
-This script is a simple wrapper for `ffuf` that simplifies the process of fuzzing virtual hosts and directories. It provides pre-configured wordlists and common options while allowing customization when needed.
+This script is a simple wrapper for `ffuf` that makes it easier for the process of fuzzing virtual hosts and directories. It provides pre-configured wordlists and common options while allowing customization when needed.
 
 ## Features
 - Two fuzzing modes: vhost and directory
